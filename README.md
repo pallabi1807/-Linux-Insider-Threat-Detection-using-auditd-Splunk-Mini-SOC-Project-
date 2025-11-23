@@ -95,6 +95,7 @@ auditd/insider.rules
 Load rules:
 sudo augenrules --load
 sudo systemctl restart auditd
+
 _______________________
 🔄 5. Splunk Universal Forwarder Configuration
 inputs.conf
@@ -135,6 +136,7 @@ index=main sourcetype=linux:audit key=bash_history
 E. Audit Log 
 splunk/savedsearches/audit_log_deletion.spl
 index=main sourcetype=linux:audit key=audit_logs
+
 ____________________________________
 🧪 7. Attack Test Cases
 Folder: /attacks/
@@ -163,7 +165,8 @@ MITRE: T1098 — Account Manipulation
 echo "" > ~/.bash_history
 Expected detection: bash_history
 MITRE: T1562.001 — Log Tampering
-__________________________-
+
+__________________________
 🖥 8. Dashboard
 XML dashboard file:
 dashboard/insider-threat-overview.xml
@@ -173,6 +176,7 @@ Sudo activity
 New user creation
 Bash history tampering
 Log deletion
+
 _____________________
 🧩 9. MITRE ATT&CK Mapping Table
 | Detection                   | MITRE Technique                  | ID        |
@@ -191,6 +195,7 @@ How Splunk forwarders send data
 How SIEM searches, dashboards, and alerts are built
 MITRE ATT&CK mapping for real SOC workflows
 How to simulate attacks safely in a lab
+
 _________________
 🧠 11. Performance & Safety Notes
 Auditd adds load if too many syscalls monitored
@@ -198,6 +203,7 @@ Avoid watching large directories like /home fully
 Monitor audit queue depth using:
 sudo auditctl -s
 If logs drop, tune audit kernel parameters
+
 _________________________
 🔮 12. Future Enhancements
 Planned improvements:
@@ -207,6 +213,7 @@ Add machine-learning based insider threat scoring
 Send alerts to Slack or Microsoft Teams
 Add threat intelligence correlation
 Build full MITRE ATT&CK Navigator layer
+
 ______________________
 👤 Author
 Pallabi Poria
