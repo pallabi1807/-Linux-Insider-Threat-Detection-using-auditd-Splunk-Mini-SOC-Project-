@@ -41,7 +41,9 @@ sudo systemctl start auditd
 
 Verify:
 sudo auditctl -s
-_________________________________-
+
+_________________________________
+
 🛡 4. Auditd Configuration
 4.1 auditd.conf 
 
