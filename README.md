@@ -10,6 +10,7 @@ Sudo misuse
 Local user creation or deletion
 Bash history tampering
 Log deletion or manipulation
+___________________________
 
 📌 1. Why This Project Matters
 
