@@ -1,0 +1,15 @@
+# Test Case: Sudo Misuse / Brute Force
+# Purpose: Simulate repeated failed sudo attempts on a Linux host.
+
+Command run:
+    sudo -k
+    sudo ls
+    sudo ls
+    sudo ls
+    sudo ls
+    sudo ls
+
+Expected detection:
+- Multiple sudo failures in auditd
+- Splunk query "sudo_misuse.spl" flags brute force
+- MITRE ATT&CK Mapping: T1078 — Valid Accounts (Privilege Misuse)
