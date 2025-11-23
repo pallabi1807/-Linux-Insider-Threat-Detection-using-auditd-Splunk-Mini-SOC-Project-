@@ -1,0 +1,53 @@
+<dashboard>
+  <label>Linux Insider Threat - Overview</label>
+  <row>
+    <panel>
+      <title>Sensitive File Modifications</title>
+      <chart>
+        <search>
+          <query>index=main sourcetype=linux:audit (key=auth_changes)</query>
+        </search>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Sudo Misuse Attempts</title>
+      <chart>
+        <search>
+          <query>index=main sourcetype=linux:audit (exe="/usr/bin/sudo")</query>
+        </search>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>User Creation / Deletion</title>
+      <chart>
+        <search>
+          <query>index=main sourcetype=linux:audit (exe="/usr/sbin/useradd" OR exe="/usr/sbin/userdel"</query>
+        </search>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Bash History Tamper</title>
+      <chart>
+        <search>
+          <query>index=main sourcetype=linux:audit key=bash_history</query>
+        </search>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Audit Logs tamper</title>
+      <chart>
+        <search>
+          <query>index=main sourcetype=linux:audit key=audit_logs</query>
+        </search>
+      </chart>
+    </panel>
+  </row>
+</dashboard>
