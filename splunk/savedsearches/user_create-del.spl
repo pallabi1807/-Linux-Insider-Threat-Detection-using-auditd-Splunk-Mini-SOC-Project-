@@ -1,0 +1,1 @@
+index=main sourcetype=linux:audit (exe="/usr/sbin/useradd" OR exe="/usr/sbin/userdel")
