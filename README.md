@@ -23,7 +23,7 @@ As a beginner, this project helped me learn:
 ✔ How SOC teams detect misuse, tampering, unauthorized access
 
 This is a real-world, practical project showcasing SOC monitoring skills.
-
+___________________________________
 🏗 2. Project Architecture
 Linux Host (Auditd) 
      → (Audit Logs)
@@ -32,7 +32,7 @@ Linux Host (Auditd)
                        → Detection Searches 
                        → Alerts 
                        → Dashboards
-
+______________________________________
 ⚙️ 3. Auditd Installation (Linux)
 sudo apt update
 sudo apt install auditd audispd-plugins -y
@@ -41,9 +41,9 @@ sudo systemctl start auditd
 
 Verify:
 sudo auditctl -s
-
+_________________________________-
 🛡 4. Auditd Configuration
-4.1 auditd.conf (recommended GitHub version)
+4.1 auditd.conf 
 
 Create file:
 auditd/auditd.conf
@@ -93,7 +93,7 @@ auditd/insider.rules
 Load rules:
 sudo augenrules --load
 sudo systemctl restart auditd
-
+_______________________
 🔄 5. Splunk Universal Forwarder Configuration
 inputs.conf
 
@@ -112,7 +112,7 @@ defaultGroup = default-autolb-group
 [tcpout:default-autolb-group]
 server = 127.0.0.1:9997
 (Replace IP if Splunk Enterprise is on another system)
-
+_______________________________
 🔍 6. Splunk Saved Searches (Detection Rules)
 A. Sensitive File Modification
 splunk/savedsearches/sensitive_file_modification.spl
@@ -133,8 +133,7 @@ index=main sourcetype=linux:audit key=bash_history
 E. Audit Log 
 splunk/savedsearches/audit_log_deletion.spl
 index=main sourcetype=linux:audit key=audit_logs
-
-
+____________________________________
 🧪 7. Attack Test Cases
 Folder: /attacks/
 
@@ -162,9 +161,8 @@ MITRE: T1098 — Account Manipulation
 echo "" > ~/.bash_history
 Expected detection: bash_history
 MITRE: T1562.001 — Log Tampering
-
+__________________________-
 🖥 8. Dashboard
-
 XML dashboard file:
 dashboard/insider-threat-overview.xml
 Contains panels for: 
@@ -173,7 +171,7 @@ Sudo activity
 New user creation
 Bash history tampering
 Log deletion
-
+_____________________
 🧩 9. MITRE ATT&CK Mapping Table
 | Detection                   | MITRE Technique                  | ID        |
 | --------------------------- | -------------------------------- | --------- |
@@ -191,14 +189,14 @@ How Splunk forwarders send data
 How SIEM searches, dashboards, and alerts are built
 MITRE ATT&CK mapping for real SOC workflows
 How to simulate attacks safely in a lab
-
+_________________
 🧠 11. Performance & Safety Notes
 Auditd adds load if too many syscalls monitored
 Avoid watching large directories like /home fully
 Monitor audit queue depth using:
 sudo auditctl -s
 If logs drop, tune audit kernel parameters
-
+_________________________
 🔮 12. Future Enhancements
 Planned improvements:
 Integrate Sysmon for Linux
@@ -207,7 +205,7 @@ Add machine-learning based insider threat scoring
 Send alerts to Slack or Microsoft Teams
 Add threat intelligence correlation
 Build full MITRE ATT&CK Navigator layer
-
+______________________
 👤 Author
 Pallabi Poria
 Beginner SOC Analyst | Cybersecurity Student
