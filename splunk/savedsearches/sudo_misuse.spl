@@ -1,0 +1,1 @@
+index=main sourcetype=linux:audit (exe="/usr/bin/sudo" OR key=sudo_exec)
