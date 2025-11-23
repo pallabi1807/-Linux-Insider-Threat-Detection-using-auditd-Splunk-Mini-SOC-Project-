@@ -1,0 +1,11 @@
+# Test Case: Bash History Tampering
+# Purpose: Detect clearing, modifying, or deleting .bash_history file.
+
+Command run:
+    echo "malicious command" >> ~/.bash_history
+    > ~/.bash_history      # or delete the file
+
+Expected detection:
+- auditd key=bash_history captured the write/delete
+- Splunk saved search "bash_history_tamper.spl" shows the activity
+- MITRE ATT&CK Mapping: T1070.003 — Clear Command History
