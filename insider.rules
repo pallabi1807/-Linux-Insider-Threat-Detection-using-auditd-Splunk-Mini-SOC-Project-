@@ -1,0 +1,59 @@
+Create this file:
+/etc/audit/rules.d/insider.rules
+And paste everything below, exactly as it is:
+
+⭐ 1. Watch critical system accounts files
+-w /etc/passwd -p wa -k auth_changes
+-w /etc/shadow -p wa -k auth_changes
+-w /etc/group  -p wa -k auth_changes
+
+⭐ 2. Watch sudoers file & sudo binary
+-w /etc/sudoers -p wa -k sudo_changes
+-w /etc/sudoers.d/ -p wa -k sudo_changes
+-w /usr/bin/sudo -p x -k sudo_exec
+
+⭐ 3. Watch bash history (user activity tampering)
+-w /root/.bash_history -p wa -k bash_history
+-w /home -p wa -k home_mods
+
+(You can add this ONLY if you want user-specific:)
+-w /home/<your-username>/.bash_history -p wa -k bash_history
+
+⭐ 4. Watch audit logs themselves (log deletion / tampering)
+-w /var/log/audit/ -p wa -k audit_logs
+-w /var/log/ -p wa -k syslog_logs
+
+⭐ 5. Watch user management commands
+-a always,exit -F arch=b64 -S execve -F path=/usr/sbin/useradd -k user_mgmt
+-a always,exit -F arch=b64 -S execve -F path=/usr/sbin/usermod -k user_mgmt
+-a always,exit -F arch=b64 -S execve -F path=/usr/sbin/userdel -k user_mgmt
+
+⭐ 6. Watch permission changes (privilege escalation attempts)
+-w /etc/ -p wa -k etc_mods
+
+⭐ 7. Watch file attribute changes (attackers modifying file metadata)
+-a always,exit -F arch=b64 -S setxattr -S removexattr -k fs_attr
+
+⭐ 8. Watch kernel module loading/removal (stealthy privilege escalation)
+-a always,exit -F arch=b64 -S init_module -S delete_module -k module_changes
+
+⭐ After saving the file:
+sudo augenrules --load
+sudo systemctl restart auditd
+sudo auditctl -l
+
+❤️ Summary (Beginner-Friendly Explanation)
+
+This file detects:
+
+| Threat                               | Rule             |
+| ------------------------------------ | ---------------- |
+| Editing passwd/shadow                | `auth_changes`   |
+| Editing sudoers                      | `sudo_changes`   |
+| Using sudo suspiciously              | `sudo_exec`      |
+| Deleting/modifying bash history      | `bash_history`   |
+| Creating/deleting Linux users        | `user_mgmt`      |
+| Log deletion / clearing tracks       | `audit_logs`     |
+| Privilege escalation via chmod/chown | `etc_mods`       |
+| Tampering file attributes            | `fs_attr`        |
+| Loading malicious kernel modules     | `module_changes` |
