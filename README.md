@@ -1,6 +1,7 @@
 Linux Insider Threat Detection Using Auditd + Splunk
 
 Beginner-Friendly Mini SOC Project | Real-World Linux Monitoring
+______________________
 
 This project demonstrates how to detect insider threat behaviors on a Linux system using Auditd for event collection and Splunk for analysis, alerting, and dashboards.
 Designed as a beginner SOC Analyst project, it covers monitoring for:
