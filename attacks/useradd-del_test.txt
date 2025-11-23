@@ -1,0 +1,22 @@
+# Test Case: New User Creation (useradd)
+# Purpose: Generate auditd + Splunk events for monitoring new local accounts.
+
+Command run:
+    sudo useradd test123
+
+Expected detection:
+- auditd rule logs execve on /usr/sbin/useradd
+- Splunk saved search "user_create-del.spl" should trigger
+- MITRE ATT&CK Mapping: T1136.001 — Create Local Account
+
+# Test Case: User Account Deletion (userdel)
+# Purpose: Generate auditd + Splunk events for monitoring removal of local accounts.
+
+Command run:
+    sudo userdel test123
+
+Expected detection:
+- auditd rule logs execve on /usr/sbin/userdel
+- File modification events for /etc/passwd and /etc/shadow
+- Splunk saved search "user_create-del.spl" should trigger
+- MITRE ATT&CK Mapping: T1531 — Account Removal
