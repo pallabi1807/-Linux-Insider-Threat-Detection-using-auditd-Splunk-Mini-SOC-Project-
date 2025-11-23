@@ -1,0 +1,10 @@
+# Test Case: Sensitive File Modification (shadow/passwd)
+# Purpose: Trigger auditd rule for unauthorized modification.
+
+Command run:
+    sudo nano /etc/shadow
+
+Expected detection:
+- auditd key=auth_changes triggered
+- Splunk saved search "sensitive_file_modification.spl" displays the event
+- MITRE ATT&CK Mapping: T1068 — Privilege Escalation (Modifying shadow)
