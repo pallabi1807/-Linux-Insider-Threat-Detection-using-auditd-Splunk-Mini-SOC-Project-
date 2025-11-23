@@ -1,0 +1,40 @@
+ ┌─────────────────────────────────────────────────────────┐
+ │                     Linux Endpoint (VM)                 │
+ │---------------------------------------------------------│
+ │  • OS: Ubuntu 20.04 / 22.04                             │
+ │  • Auditd                                               │
+ │      - insider.rules                                    │
+ │      - auditd.conf                                      │
+ │  • Audit Log Location: /var/log/audit/audit.log         │
+ │                                                         │
+ │  → Splunk Universal Forwarder                           │
+ │      - inputs.conf                                      │
+ │      - outputs.conf                                     │
+ └───────────────┬─────────────────────────────────────────┘
+                 │  (Forward logs via TCP port 9997)
+                 ▼
+ ┌─────────────────────────────────────────────────────────┐
+ │                    Splunk Enterprise Server             │
+ │---------------------------------------------------------│
+ │  Indexer: Stores audit logs in index "auditd"           │
+ │  Search Head:                                           │
+ │      • Detection Queries                                │
+ │      • MITRE Tactic Mapping                             │
+ │      • Correlation Searches                             │
+ │      • Alerts                                           │
+ │      • Dashboards                                       │
+ │                                                         │
+ │  Outputs:                                               │
+ │      → PDF/CSV report                                   │
+ │      → Alerts to email / webhook                        │
+ └───────────────┬─────────────────────────────────────────┘
+                 │
+                 ▼
+ ┌─────────────────────────────────────────────────────────┐
+ │               SOC Analyst / Incident Responder          │
+ │---------------------------------------------------------│
+ │  • Investigates alerts                                  │
+ │  • Reviews dashboards                                   │
+ │  • Confirms insider activity                            │
+ │  • Generates reports                                    │
+ └─────────────────────────────────────────────────────────┘
