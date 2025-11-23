@@ -1,0 +1,24 @@
+STEP 1: User performs action on Linux
+        → auditd captures event via syscall monitoring
+
+STEP 2: auditd writes logs to /var/log/audit/audit.log
+
+STEP 3: Splunk Forwarder (UF) monitors the file
+        → reads new log entries in real time
+
+STEP 4: UF sends logs securely (TCP 9997) to Splunk Indexer
+
+STEP 5: Splunk Indexer:
+        • Stores logs
+        • Applies parsing rules (props/transforms)
+
+STEP 6: Splunk Search Head:
+        • Runs scheduled/real-time detections
+        • Maps events to MITRE ATT&CK
+        • Triggers alerts
+
+STEP 7: SOC Analyst:
+        • Receives alert notification
+        • Opens dashboard to investigate
+        • Reviews event fields
+        • Determines severity and response
